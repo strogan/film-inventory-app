@@ -1,8 +1,6 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { InventoryService } from '../service/inventory.service';
 import { Inventory } from '../entities/inventory.entity';
-
-
 
 @Controller('inventory')
 export class InventoryController {

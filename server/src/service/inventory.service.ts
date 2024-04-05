@@ -11,7 +11,7 @@ export class InventoryService {
   ) {}
 
   async getInventory(): Promise<Inventory[]> {
-    return await this.inventoryRepository.find()
+    return await this.inventoryRepository.find();
   }
 
   async addInventory(inventory: Inventory): Promise<Inventory> {
@@ -20,7 +20,9 @@ export class InventoryService {
   }
 
   async updateInventory(id: number, inventory: Inventory): Promise<Inventory> {
-    const existingInventory = await this.inventoryRepository.findOne({where: {id}});
+    const existingInventory = await this.inventoryRepository.findOne({
+      where: { id },
+    });
     if (!existingInventory) {
       throw new Error('Inventory item not found');
     }
@@ -34,14 +36,15 @@ export class InventoryService {
     await this.inventoryRepository.delete(id);
   }
 
-
   async addInitialItems(): Promise<void> {
     const initialItems = [
       { name: 'camera', quantity: 10 },
       { name: 'videocamera', quantity: 20 },
-      { name: 'nothing', quantity: 0 }
+      { name: 'nothing', quantity: 0 },
     ];
 
-    await this.inventoryRepository.save(initialItems.map(item => this.inventoryRepository.create(item)));
+    await this.inventoryRepository.save(
+      initialItems.map((item) => this.inventoryRepository.create(item)),
+    );
   }
 }

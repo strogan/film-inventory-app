@@ -29,7 +29,9 @@ let InventoryService = class InventoryService {
         return await this.inventoryRepository.save(newInventory);
     }
     async updateInventory(id, inventory) {
-        const existingInventory = await this.inventoryRepository.findOne({ where: { id } });
+        const existingInventory = await this.inventoryRepository.findOne({
+            where: { id },
+        });
         if (!existingInventory) {
             throw new Error('Inventory item not found');
         }
@@ -44,9 +46,9 @@ let InventoryService = class InventoryService {
         const initialItems = [
             { name: 'camera', quantity: 10 },
             { name: 'videocamera', quantity: 20 },
-            { name: 'nothing', quantity: 0 }
+            { name: 'nothing', quantity: 0 },
         ];
-        await this.inventoryRepository.save(initialItems.map(item => this.inventoryRepository.create(item)));
+        await this.inventoryRepository.save(initialItems.map((item) => this.inventoryRepository.create(item)));
     }
 };
 exports.InventoryService = InventoryService;
